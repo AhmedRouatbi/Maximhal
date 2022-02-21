@@ -49,17 +49,23 @@ else ()
     add_compile_options(-Og -g)
 endif ()
 add_definitions(-DTARGET=MAX32670 -DTARGET_REV=0x4131)
-include_directories(Core/Inc  Drivers/CMSIS/Device/Maxim/MAX32670/Include/  Drivers/CMSIS/Include/
-        Drivers/CMSIS/Device/Maxim/MAX32670/PeripheralDrivers/include/ Drivers/CMSIS/Device/Maxim/MAX32670/PeripheralDrivers/src/ )
+include_directories(Core/Inc
+        library/time
+        Drivers/CMSIS/Device/Maxim/MAX32670/Include/
+        Drivers/CMSIS/Include/
+        Drivers/CMSIS/Device/Maxim/MAX32670/PeripheralDrivers/include/
+        Drivers/CMSIS/Device/Maxim/MAX32670/PeripheralDrivers/src/SYS/
+
+        )
 
 
 
-file(GLOB_RECURSE SOURCES "startup/*.*" "Drivers/*.*" "Core/*.*")
+file(GLOB_RECURSE SOURCES "startup/*.*" "Drivers/*.*" "Core/*.*"  "library/time/*.*" "Drivers/CMSIS/Device/Maxim/MAX32670/PeripheralDrivers/src/SYS/*.*" )
 
 set(LINKER_SCRIPT ${CMAKE_SOURCE_DIR}/max32670.ld)
-
+set(SOURCE_FILES main.cpp )
 add_link_options(-Wl,-gc-sections,--print-memory-usage,-Map=${PROJECT_BINARY_DIR}/${PROJECT_NAME}.map)
-add_link_options(-mcpu=cortex-m4 -mthumb -mthumb-interwork)
+add_link_options(-mcpu=cortex-m4 -mthumb -mthumb-interwork --specs=nosys.specs)
 add_link_options(-T ${LINKER_SCRIPT})
 
 add_executable(${PROJECT_NAME}.elf ${SOURCES} ${LINKER_SCRIPT})
