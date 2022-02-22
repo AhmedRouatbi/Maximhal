@@ -51,6 +51,7 @@ endif ()
 add_definitions(-DTARGET=MAX32670 -DTARGET_REV=0x4131)
 include_directories(Core/Inc
         library/time
+        library/gpio
         Drivers/CMSIS/Device/Maxim/MAX32670/Include/
         Drivers/CMSIS/Include/
         Drivers/CMSIS/Device/Maxim/MAX32670/PeripheralDrivers/include/
@@ -60,7 +61,7 @@ include_directories(Core/Inc
 
 
 
-file(GLOB_RECURSE SOURCES "startup/*.*" "Drivers/*.*" "Core/*.*"  "library/time/*.*" "Drivers/CMSIS/Device/Maxim/MAX32670/PeripheralDrivers/src/SYS/*.*" )
+file(GLOB_RECURSE SOURCES "startup/*.*" "Drivers/*.*" "Core/*.*" "library/gpio/*.*" "library/time/*.*" "Drivers/CMSIS/Device/Maxim/MAX32670/PeripheralDrivers/src/SYS/*.*" )
 
 set(LINKER_SCRIPT ${CMAKE_SOURCE_DIR}/max32670.ld)
 set(SOURCE_FILES main.cpp )

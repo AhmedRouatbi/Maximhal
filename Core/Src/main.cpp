@@ -1,34 +1,28 @@
 
 #include "main.h"
-
-#include "gpio.h"
 #include "Time.hpp"
-#define MXC_GPIO_PORT_OUT               MXC_GPIO0
-#define MXC_GPIO_PIN_OUT                MXC_GPIO_PIN_23
+#include "Gpio.hpp"
 
+
+Gpio ledGreen{{MXC_GPIO0, 23}};
+Gpio ledRed{{MXC_GPIO0, 22}};
+Gpio button{{MXC_GPIO0, 21}, Gpio::Function::INPUT, Gpio::Pull::UP};
 
 int main(void) {
 
-  mxc_gpio_cfg_t gpio_out;
-  gpio_out.port = MXC_GPIO_PORT_OUT;
-  gpio_out.mask = MXC_GPIO_PIN_OUT;
-  gpio_out.pad = MXC_GPIO_PAD_NONE;
-  gpio_out.func = MXC_GPIO_FUNC_OUT;
-  MXC_GPIO_Config(&gpio_out);
+  static uint32_t startTime = 0;
   while (1)
   {
-    MXC_GPIO_OutToggle(gpio_out.port, gpio_out.mask);
-//    time().sleep(1000);
+
+    ledRed.set(button.get());
+    if (time().millis() - startTime > 1000)
+    {
+      startTime = time().millis();
+      ledGreen.toggle();
+    }
 
   }
   return 0;
 }
 
-void Error_Handler(void) {
-
-  while (1)
-  {
-  }
-
-}
 
