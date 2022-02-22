@@ -1,6 +1,6 @@
 
 #include "main.h"
-#include "mxc_delay.h"
+
 #include "gpio.h"
 #include "Time.hpp"
 #define MXC_GPIO_PORT_OUT               MXC_GPIO0
@@ -18,7 +18,7 @@ int main(void) {
   while (1)
   {
     MXC_GPIO_OutToggle(gpio_out.port, gpio_out.mask);
-    time().sleep(1000);
+//    time().sleep(1000);
 
   }
   return 0;
