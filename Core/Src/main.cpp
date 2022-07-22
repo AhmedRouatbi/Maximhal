@@ -1,8 +1,9 @@
 
+#include <cstring>
 #include "main.h"
 #include "Time.hpp"
 #include "Gpio.hpp"
-
+#include "dma.h"
 
 Gpio ledGreen{{MXC_GPIO0, 23}};
 Gpio ledRed{{MXC_GPIO0, 22}};

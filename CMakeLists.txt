@@ -30,7 +30,7 @@ add_compile_options(-mcpu=cortex-m4 -mthumb -mthumb-interwork)
 add_compile_options(-ffunction-sections -fdata-sections -fno-common -fmessage-length=0)
 
 # uncomment to mitigate c++17 absolute addresses warnings
-#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-register")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-register")
 
 # Enable assembler files preprocessing
 add_compile_options($<$<COMPILE_LANGUAGE:ASM>:-x$<SEMICOLON>assembler-with-cpp>)
@@ -61,7 +61,7 @@ include_directories(Core/Inc
 
 
 
-file(GLOB_RECURSE SOURCES "startup/*.*" "Drivers/*.*" "Core/*.*" "library/gpio/*.*" "library/time/*.*" "Drivers/CMSIS/Device/Maxim/MAX32670/PeripheralDrivers/src/SYS/*.*" )
+file(GLOB_RECURSE SOURCES "startup/*.*" "Drivers/*.*" "Core/*.*" "library/gpio/*.*" "library/dma/*.*" "library/time/*.*" "Drivers/CMSIS/Device/Maxim/MAX32670/PeripheralDrivers/src/SYS/*.*" )
 
 set(LINKER_SCRIPT ${CMAKE_SOURCE_DIR}/max32670.ld)
 set(SOURCE_FILES main.cpp )
